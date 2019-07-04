@@ -2,22 +2,15 @@
 
 <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-
-<script type="text/javascript">
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script type="text/babel">
   const $root = document.getElementById('root');
-  // const $ = document.createElement('div');
-  // $.textContent = 'Hello World!';
-  // $.className = 'container';
-  // $root.append($);
-
-  const $ = React.createElement(
-    'div',
-    {
-      className: 'container',
-      children: ['Firts Child', 'Second'],
-    },
-    // 'Hello World!',
-    // 'Goodbye World!'
-  );
+  const content = 'Hello World';
+  const myClassName = 'container';
+  const props = {
+    className: 'container',
+    children: 'Hello World',
+  };
+  const $ = <div {...props} />
   ReactDOM.render($, $root);
 </script>
