@@ -5,12 +5,12 @@
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 <script type="text/babel">
   const $root = document.getElementById('root');
-  const content = 'Hello World';
-  const myClassName = 'container';
-  const props = {
-    className: 'container',
-    children: 'Hello World',
-  };
-  const $ = <div {...props} />
+  const message = props => <div>{props.msg}</div>;
+  const $ = (
+    <div className="container">
+      {React.createElement(message, {msg: 'Hello World'})}
+      {React.createElement(message, {msg: 'Goodbye World'})}
+    </div>
+  );
   ReactDOM.render($, $root);
 </script>
