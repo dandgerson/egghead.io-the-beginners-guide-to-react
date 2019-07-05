@@ -8,8 +8,10 @@
   const Message = props => <div>{props.children}</div>;
   const $ = (
     <div className="container">
-      <Message>Hello World</Message>
-      <Message>Goodbye World</Message>
+      <Message>
+        Hello World
+        <Message>Goodbye World</Message>
+      </Message>
     </div>
   );
   ReactDOM.render($, $root);
