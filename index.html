@@ -5,11 +5,11 @@
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 <script type="text/babel">
   const $root = document.getElementById('root');
-  const message = props => <div>{props.msg}</div>;
+  const Message = props => <div>{props.msg}</div>;
   const $ = (
     <div className="container">
-      <Message, {msg: 'Hello World'})}
-      {React.createElement(message, {msg: 'Goodbye World'})}
+      <Message msg="Hello World" />
+      <Message msg="Goodbye World" />
     </div>
   );
   ReactDOM.render($, $root);
