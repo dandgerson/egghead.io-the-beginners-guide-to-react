@@ -8,7 +8,7 @@
   function SayHello(props) {
     return (
       <div>
-        Hello {props.firstName} {props.lastName}!
+        Hello {props.firstName} {props.lastName || 'Unknown'}!
       </div>
     );
   }
