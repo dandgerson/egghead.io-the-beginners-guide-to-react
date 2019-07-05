@@ -3,16 +3,30 @@
 <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.min.js"></script>
 <script type="text/babel">
-  const $root = document.getElementById('root');
-  const Message = props => <div>{props.children}</div>;
-  const $ = (
-    <div className="container">
-      <Message>
-        Hello World
-        <Message>Goodbye World</Message>
-      </Message>
-    </div>
+  function SayHello(props) {
+    return (
+      <div>
+        Hello {props.firstName} {props.lastName}!
+      </div>
+    );
+  }
+
+  const PropTypes = {
+    string(props, propName, componentName) {
+      if (typeof props[propName] !== 'string') {
+        return new Error(`Hey you should pass a string for ${propName} in ${componentName} but you passed ${typeof props[propName]}!`)
+      }
+    }
+  }
+
+  SayHello.propTypes = {
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+  }
+  ReactDOM.render(
+    <SayHello firstName={true} />,
+    document.getElementById('root')
   );
-  ReactDOM.render($, $root);
 </script>
