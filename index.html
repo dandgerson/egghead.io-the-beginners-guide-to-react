@@ -24,11 +24,12 @@
 </style>
 <script type="text/babel">
   const $root = document.getElementById('root');
-  function Box({className = '', style, ...rest}) {
+  function Box({className = '', size, style, ...rest}) {
+    const sizeClassName = size ? `box--${size}` : '';
     return (
         <div>
           <div
-            className={`box ${className}`.trim()}
+            className={`box ${className} ${sizeClassName}`.trim()}
             style={{paddingLeft: 20, ...style}}
             {...rest}
           />
@@ -39,19 +40,20 @@
   const $ = (
     <div>
       <Box
-        className="box--small"
+        size="small"
         style={{backgroundColor: 'lightblue'}}
-      >
+        >
         small box
-      </Box>
-      <Box
-        className="box--medium"
+        </Box>
+        <Box
+        size="medium"
+        className="box--"
         style={{backgroundColor: 'lightgreen'}}
-      >
+        >
         medium box
-      </Box>
-      <Box
-        className="box--large"
+        </Box>
+        <Box
+        size="large"
         style={{backgroundColor: 'pink'}}
       >
         large box
