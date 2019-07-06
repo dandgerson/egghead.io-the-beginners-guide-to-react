@@ -4,67 +4,25 @@
 <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-<style>
-  .box {
-    border: 3px solid black;
-    border-radius: 5px;
-  }
-  .box--small {
-    width: 50px;
-    height: 50px;
-  }
-  .box--medium {
-    width: 70px;
-    height: 70px;
-  }
-  .box--large {
-    width: 100px;
-    height: 100px;
-  }
-</style>
 <script type="text/babel">
   const $root = document.getElementById('root');
-  function Box({
-    className = '',
-    size,
-    style,
-    ...rest
-  }) {
-    const sizeClassName = size ? `box--${size}` : '';
+  const state = {eventCount: 0, username: ''};
+
+  function App() {
     return (
-        <div>
-          <div
-            className={`box ${className} ${sizeClassName}`.trim()}
-            style={{paddingLeft: 20, ...style}}
-            {...rest}
-          />
-        </div>
-      );
+      <div>
+        <p>
+          There have been {state.eventCount} events
+        </p>
+        <p>
+          <button>React</button>
+        </p>
+        <p>You typed: {state.username}</p>
+        <p>
+          <input />
+        </p>
+      </div>
+    );
   }
-
-  const $ = (
-    <div>
-      <Box
-        size="small"
-        style={{backgroundColor: 'lightblue'}}
-        >
-        small box
-        </Box>
-        <Box
-        size="medium"
-        className="box--"
-        style={{backgroundColor: 'lightgreen'}}
-        >
-        medium box
-        </Box>
-        <Box
-        size="large"
-        style={{backgroundColor: 'pink'}}
-      >
-        large box
-      </Box>
-    </div>
-  )
-
-  ReactDOM.render($, $root);
+  ReactDOM.render(<App />, $root);
 </script>
