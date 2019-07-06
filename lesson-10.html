@@ -17,7 +17,7 @@
   <script type="text/babel">
     const $root = document.getElementById('root');
 
-    function StopWatch() {
+    function StopWatch({lapse, running}) {
       const buttonStyles = {
         border: '1px solid #ccc',
         background: '#fff',
@@ -28,8 +28,10 @@
       }
       return (
         <div style={{textAlign: 'center'}}>
-          <label style={{fontSize: '5em', display: 'block'}}>0ms</label>
-          <button style={buttonStyles}>Start</button>
+          <label style={{fontSize: '5em', display: 'block'}}>
+            {lapse}ms
+          </label>
+          <button style={buttonStyles}>{running ? 'Stop' : 'Start'}</button>
           <button style={buttonStyles}>Clear</button>
         </div>
       )
