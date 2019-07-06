@@ -5,49 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 <body>
-<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
-<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
   <div id="root"></div>
 
-<script type="text/babel">
+  <script type="text/babel">
     const $root = document.getElementById('root');
-    const state = {eventCount: 0, username: ''};
 
-    function App() {
+    function StopWatch() {
+      const buttonStyles = {
+        border: '1px solid #ccc',
+        background: '#fff',
+        fontSize: '2em',
+        padding: 15,
+        margin: 5,
+        width: 200,
+      }
       return (
-        <div>
-          <p>
-            There have been {state.eventCount} events
-          </p>
-          <p>
-            <button onMouseOver={increment}>React</button>
-          </p>
-          <p>You typed: {state.username}</p>
-          <p>
-            <input onChange={updateUsername} />
-          </p>
+        <div style={{textAlign: 'center'}}>
+          <label style={{fontSize: '5em', display: 'block'}}>0ms</label>
+          <button style={buttonStyles}>Start</button>
+          <button style={buttonStyles}>Clear</button>
         </div>
-      );
+      )
     }
 
-    const increment = () => setState({eventCount: state.eventCount + 1});
-    const updateUsername = event => setState({username: event.target.value});
+    const $ = <StopWatch />
+    
+    ReactDOM.render($, $root);
 
-    function setState(newState) {
-      Object.assign(state, newState);
-      renderApp();
-    }
-
-    function renderApp() {
-      ReactDOM.render(<App />, $root);
-    }
-
-    renderApp();
-</script>
+  </script>
 </body>
 </html>
