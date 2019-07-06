@@ -15,17 +15,18 @@
           There have been {state.eventCount} events
         </p>
         <p>
-          <button onClick={increment}>React</button>
+          <button onMouseOver={increment}>React</button>
         </p>
         <p>You typed: {state.username}</p>
         <p>
-          <input />
+          <input onChange={updateUsername} />
         </p>
       </div>
     );
   }
 
   const increment = () => setState({eventCount: state.eventCount + 1});
+  const updateUsername = event => setState({username: event.target.value});
 
   function setState(newState) {
     Object.assign(state, newState);
