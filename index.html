@@ -24,7 +24,12 @@
 </style>
 <script type="text/babel">
   const $root = document.getElementById('root');
-  function Box({className = '', size, style, ...rest}) {
+  function Box({
+    className = '',
+    size,
+    style,
+    ...rest
+  }) {
     const sizeClassName = size ? `box--${size}` : '';
     return (
         <div>
