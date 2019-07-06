@@ -1,41 +1,53 @@
-<div id="root"></div>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
 <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <div id="root"></div>
+
 <script type="text/babel">
-  const $root = document.getElementById('root');
-  const state = {eventCount: 0, username: ''};
+    const $root = document.getElementById('root');
+    const state = {eventCount: 0, username: ''};
 
-  function App() {
-    return (
-      <div>
-        <p>
-          There have been {state.eventCount} events
-        </p>
-        <p>
-          <button onMouseOver={increment}>React</button>
-        </p>
-        <p>You typed: {state.username}</p>
-        <p>
-          <input onChange={updateUsername} />
-        </p>
-      </div>
-    );
-  }
+    function App() {
+      return (
+        <div>
+          <p>
+            There have been {state.eventCount} events
+          </p>
+          <p>
+            <button onMouseOver={increment}>React</button>
+          </p>
+          <p>You typed: {state.username}</p>
+          <p>
+            <input onChange={updateUsername} />
+          </p>
+        </div>
+      );
+    }
 
-  const increment = () => setState({eventCount: state.eventCount + 1});
-  const updateUsername = event => setState({username: event.target.value});
+    const increment = () => setState({eventCount: state.eventCount + 1});
+    const updateUsername = event => setState({username: event.target.value});
 
-  function setState(newState) {
-    Object.assign(state, newState);
+    function setState(newState) {
+      Object.assign(state, newState);
+      renderApp();
+    }
+
+    function renderApp() {
+      ReactDOM.render(<App />, $root);
+    }
+
     renderApp();
-  }
-
-  function renderApp() {
-    ReactDOM.render(<App />, $root);
-  }
-
-  renderApp();
 </script>
+</body>
+</html>
