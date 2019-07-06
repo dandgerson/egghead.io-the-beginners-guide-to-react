@@ -15,7 +15,7 @@
           There have been {state.eventCount} events
         </p>
         <p>
-          <button>React</button>
+          <button onClick={increment}>React</button>
         </p>
         <p>You typed: {state.username}</p>
         <p>
@@ -24,5 +24,17 @@
       </div>
     );
   }
-  ReactDOM.render(<App />, $root);
+
+  const increment = () => setState({eventCount: state.eventCount + 1});
+
+  function setState(newState) {
+    Object.assign(state, newState);
+    renderApp();
+  }
+
+  function renderApp() {
+    ReactDOM.render(<App />, $root);
+  }
+
+  renderApp();
 </script>
