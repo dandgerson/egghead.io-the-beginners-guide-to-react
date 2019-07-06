@@ -4,17 +4,60 @@
 <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<style>
+  .box {
+    border: 3px solid black;
+    border-radius: 5px;
+  }
+  .box--small {
+    width: 50px;
+    height: 50px;
+  }
+  .box--medium {
+    width: 70px;
+    height: 70px;
+  }
+  .box--large {
+    width: 100px;
+    height: 100px;
+  }
+</style>
 <script type="text/babel">
   const $root = document.getElementById('root');
-  function tick() {
-    const time = new Date().toLocaleTimeString();
-    const $ = <div>It is 
-      <input value={time}/>
-      <input value={time}/>
-    </div>
-    ReactDOM.render($, $root);
+  function Box({className = '', style, ...rest}) {
+    return (
+        <div>
+          <div
+            className={`box ${className}`.trim()}
+            style={{paddingLeft: 20, ...style}}
+            {...rest}
+          />
+        </div>
+      );
   }
-  setInterval(() => {
-    tick()
-  }, 1000);
+
+  const $ = (
+    <div>
+      <Box
+        className="box--small"
+        style={{backgroundColor: 'lightblue'}}
+      >
+        small box
+      </Box>
+      <Box
+        className="box--medium"
+        style={{backgroundColor: 'lightgreen'}}
+      >
+        medium box
+      </Box>
+      <Box
+        className="box--large"
+        style={{backgroundColor: 'pink'}}
+      >
+        large box
+      </Box>
+    </div>
+  )
+
+  ReactDOM.render($, $root);
 </script>
