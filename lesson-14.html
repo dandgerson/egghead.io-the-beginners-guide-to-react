@@ -20,10 +20,10 @@
     class NameForm extends React.Component {
       handleSubmit = (event) => {
         event.preventDefault();
-        console.log({target: event.target});
-        console.log({targetValue: event.target[0].value  });
-        console.log({targetName: event.target.elements.username.value  });
-        console.log({inputNode: this.inputNode.value  });
+        console.log({target: event.target}); // first
+        console.log({targetValue: event.target[0].value  }); // second
+        console.log({targetName: event.target.elements.username.value  }); // third
+        console.log({inputNode: this.inputNode.value  }); // fourth
       }
       render() {
         return (
