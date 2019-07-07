@@ -18,7 +18,7 @@
     const $root = document.getElementById('root');
 
     class NameForm extends React.Component {
-      state = {error: null}
+      state = {error: this.props.getErrorMessage('')}
 
       handleSubmit = (event) => {
         event.preventDefault();
@@ -38,12 +38,6 @@
         this.setState({
           error: this.props.getErrorMessage(value),
         });
-      }
-
-      componentDidMount() {
-        this.setState({
-          error: this.props.getErrorMessage(''),
-        })
       }
 
       render() {
