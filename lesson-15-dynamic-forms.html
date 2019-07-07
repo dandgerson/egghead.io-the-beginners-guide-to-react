@@ -18,19 +18,36 @@
     const $root = document.getElementById('root');
 
     class NameForm extends React.Component {
+      state = {error: null}
+
       handleSubmit = (event) => {
         event.preventDefault();
         const value = event.target.elements.username.value;
         const error = this.props.getErrorMessage(
           value,
-        );
-        if (error) {
-          console.log(`error: ${error}`);
-        } else {
-          console.log(`success: ${value}`);
+          );
+          if (error) {
+            console.log(`error: ${error}`);
+          } else {
+            console.log(`success: ${value}`);
+          }
         }
+
+      handleChange = (event) => {
+        const { value } = event.target;
+        this.setState({
+          error: this.props.getErrorMessage(value),
+        });
       }
+
+      componentDidMount() {
+        this.setState({
+          error: this.props.getErrorMessage(''),
+        })
+      }
+
       render() {
+        const { error } = this.state;
         return (
           <form onSubmit={this.handleSubmit}>
             <label>
@@ -38,10 +55,21 @@
               <input
                 type="text"
                 name="username"
+                onChange={this.handleChange}
                 ref={node => this.inputNode = node}
               />
             </label>
-            <button type="submit">Submit</button>
+            {error ? (
+              <div style={{color: 'red'}}>
+                {error}
+              </div>
+            ) : null}
+            <button
+              type="submit"
+              disabled={Boolean(error)}
+            >
+              Submit
+            </button>
           </form>
         );
       }
