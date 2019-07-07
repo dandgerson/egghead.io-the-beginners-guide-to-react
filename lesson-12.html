@@ -18,11 +18,8 @@
     const $root = document.getElementById('root');
 
     class Counter extends React.Component {
-      constructor(...args) {
-        super(...args);
-        this.state = { count: 0 };
-      }
-      handleClick() {
+      state = { count: 0 };
+      handleClick = () => {
         this.setState(({count}) => ({
           count: count + 1,
         }));
