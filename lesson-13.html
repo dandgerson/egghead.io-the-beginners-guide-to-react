@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.js"></script>
+</head>
+<body>
+
+  <div id="root"></div>
+  <style>
+    .tilt-root {
+      height: 150px;
+      background-color: red;
+      width: 200px;
+      background-image: linear-gradient(315deg, rgb(248, 21, 180), rgb(240, 219, 34));
+      transform-style: preserve-3d;
+      will-change: transfrom;
+      transform: perspective(1000px) rotate(0deg) rotateY()
+    }
+
+    .tilt-child {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translateZ(30px) translateX(-50%) translateY(-50%);
+      box-shadow: 0 0 50px 0 rgba(51, 51, 51, .3);
+      background-color: #fff;
+    }
+
+    .totally-centered {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+  <script type="text/babel">
+    const $root = document.getElementById('root');
+
+    class Tilt extends React.Component {
+      componentDidMount() {
+        VanillaTilt.init(this.rootNode, {
+          max: 25,
+          speed: 400,
+          glare: true,
+          'max-glare': 0.5,
+        });
+      }
+      render() {
+        return (
+          <div
+            ref={node => (this.rootNode = node)}
+            className="tilt-root"
+          >
+            <div className="tilt-child">
+              <div {...this.props} />
+            </div>
+          </div>
+        );
+      }
+    }
+
+    class App extends React.Component {
+      render() {
+        return (
+          <div className="totally-centered">
+            <Tilt>
+              <div className="totally-centered">
+                vanilla-titl.js
+              </div>
+            </Tilt>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<App />, $root);
+
+  </script>
+</body>
+</html>
