@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const $root = document.getElementById('root');
+
+    class StopWatch extends React.Component {
+      componentWillUnmount() {
+        this.props.handleClearClick();
+      }
+      render() {
+        const { lapse, running } = this.props;
+        const buttonStyles = {
+          border: '1px solid #ccc',
+          background: '#fff',
+          fontSize: '2em',
+          padding: 15,
+          margin: 5,
+          width: 200,
+        }
+        return (
+          <div style={{textAlign: 'center'}}>
+            <label style={{fontSize: '5em', display: 'block'}}>
+              {lapse}ms
+            </label>
+            <button 
+              style={buttonStyles}
+              onClick={this.props.handleRunClick}
+            >
+              {running ? 'Stop' : 'Start'}
+            </button>
+
+            <button
+              style={buttonStyles}
+              onClick={this.props.handleClearClick}
+            >
+              Clear
+            </button>
+          </div>
+        )
+      }
+    }
+
+    function StopWatchToggler(props) {
+      return (
+        <div className="toggler-container">
+          <form>
+            <label>
+              Show Stop Watch
+              <input
+                type="checkbox"
+                onChange={props.handleChange}
+              />
+            </label>
+          </form>
+          <hr className="delimiter" />
+        </div>
+      );
+    }
+
+    class App extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          show: true,
+          lapse: 0,
+          running: false
+        };
+      }
+
+      handleChange = () => {
+        this.setState({show: !this.state.show});
+      }
+
+      handleRunClick = () => {
+        this.setState(state => {
+          if (state.running) {
+            clearInterval(this.timer);
+          } else {
+            const startTime = Date.now() - this.state.lapse;
+            this.timer = setInterval(() => {
+              this.setState(
+                {
+                  lapse: Date.now() - startTime
+                },
+                () => console.log(this.state.lapse)
+              );
+            });
+          }
+          return { running: !state.running };
+        })
+      }
+
+      handleClearClick = () => {
+        clearInterval(this.timer);
+        this.setState({lapse: 0, running: false});
+      }
+
+      render() {
+        return (
+          <div className="app-container">
+            <StopWatchToggler
+              handleChange={this.handleChange}
+            />
+            {this.state.show && (
+              <StopWatch
+                lapse={this.state.lapse}
+                running={this.state.running}
+                timer={this.timer}
+                handleRunClick={this.handleRunClick}
+                handleClearClick={this.handleClearClick}
+              />
+            )}
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<App />, $root);
+
+  </script>
+</body>
+</html>
