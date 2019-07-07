@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const $root = document.getElementById('root');
+
+    class NameForm extends React.Component {
+      handleSubmit = (event) => {
+        event.preventDefault();
+        const value = event.target.elements.username.value;
+        const error = this.props.getErrorMessage(
+          value,
+        );
+        if (error) {
+          console.log(`error: ${error}`);
+        } else {
+          console.log(`success: ${value}`);
+        }
+      }
+      render() {
+        return (
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Name:
+              <input
+                type="text"
+                name="username"
+                ref={node => this.inputNode = node}
+              />
+            </label>
+            <button type="submit">Submit</button>
+          </form>
+        );
+      }
+    }
+
+    class App extends React.Component {
+      render() {
+        return (
+          <div className="app-container">
+            <NameForm
+              getErrorMessage={value => {
+                if (value.length < 3) {
+                  return `Value must be at least 3 characters, but have ${value.length}`;
+                }
+                if (!value.includes('s')) {
+                  return `Value does not include "s" but it should`;
+                }
+                return null;
+              }}
+            />
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<App />, $root);
+
+  </script>
+</body>
+</html>
